@@ -55,8 +55,8 @@ namespace HotDrinks.Tests.BL
             cart.AddDrink(PricyDrink);
             cart.ApplyDiscount(DiscountCodes.DISCOUNT20);
             //Assert
-            Assert.AreEqual(cart.GetTotal(), total);
-            Assert.AreEqual(cart.GetDiscount(), 0.2M);
+            Assert.AreEqual(cart.Total, total);
+            Assert.AreEqual(cart.Discount, 0.2M);
         }
 
         [TestMethod]
@@ -70,8 +70,8 @@ namespace HotDrinks.Tests.BL
             cart.AddDrink(PricyDrink);
             cart.ApplyDiscount(DiscountCodes.DISCOUNT50);
             //Assert
-            Assert.AreEqual(cart.GetTotal(), total);
-            Assert.AreEqual(cart.GetDiscount(), 0.5M);
+            Assert.AreEqual(cart.Total, total);
+            Assert.AreEqual(cart.Discount, 0.5M);
         }
 
         [TestMethod]
@@ -85,8 +85,8 @@ namespace HotDrinks.Tests.BL
             cart.AddDrink(PricyDrink);
             cart.ApplyDiscount(DiscountCodes.ALLFREE);
             //Assert
-            Assert.AreEqual(cart.GetTotal(), total);
-            Assert.AreEqual(cart.GetDiscount(), 1M);
+            Assert.AreEqual(cart.Total, total);
+            Assert.AreEqual(cart.Discount, 1M);
         }
 
         [TestMethod]
@@ -101,7 +101,7 @@ namespace HotDrinks.Tests.BL
             cart.AddDrink(CheapDrink);
             cart.AddDrink(CheapDrink);
             //Assert
-            Assert.AreEqual(cart.GetTotal(), total);
+            Assert.AreEqual(cart.Total, total);
         }
 
         [TestMethod]

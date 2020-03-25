@@ -82,9 +82,5 @@ namespace HotDrinks.BL
 
         private bool ContainsDrink(IDrink drink) => cart.Any(i => i.Drink.Id == drink.Id);
         private ICartItem GetItem(int id) => cart.SingleOrDefault(i => i.Drink.Id == id);
-
-        public decimal GetTotal() => Total;
-        public decimal GetDiscount() => Discount;
     }
-
 }
