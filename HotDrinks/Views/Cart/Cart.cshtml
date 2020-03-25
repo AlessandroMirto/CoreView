@@ -1,0 +1,33 @@
+﻿@model HotDrinks.ViewModels.CartViewModel
+
+@if (Model.cartItems.Any())
+{
+    <div class="row">
+        <h5 style="text-align:center;">Your cart</h5>
+        @foreach (var item in Model.cartItems)
+        {
+            <div class="row">
+                <div class="col-xs-6" style="text-align:center;"><p>@String.Format("{0}: {1}", item.Drink.Name, item.Quantity)</p></div>
+                <div class="col-xs-2">
+                    <button onclick="AddToCart(@item.Drink.Id)">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    </button>
+                </div>
+                <div class="col-xs-2">
+                    <button onclick="RemoveFromCart(@item.Drink.Id)">
+                        <span class="glyphicon glyphicon-minus-sign"></span>
+                    </button>
+                </div>
+                <div class="col-xs-2">
+                    <button onclick="DeleteItem(@item.Drink.Id)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </div>
+            </div>
+        }
+        <h5 style="text-align:center;">@String.Format("Total: {0} €", Model.Total)</h5>
+        <div style="text-align:center;">
+            <a class="btn btn-primary" href='@Url.Action("Index", "Checkout")'>Checkout</a>
+        </div>
+    </div>
+}

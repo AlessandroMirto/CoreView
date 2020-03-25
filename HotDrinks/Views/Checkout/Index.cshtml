@@ -1,0 +1,56 @@
+﻿@model HotDrinks.ViewModels.CheckoutViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Checkout</h2>
+<hr />
+<div class="row">
+    <div class="col-sm-6">
+        <h5>Your Order:</h5>
+        @foreach (var item in Model.Cart.cartItems)
+        {
+            <div class="row">
+                @Html.Label(String.Format("{0} - Quantity: {1}", item.Drink.Name, item.Quantity));
+            </div>
+        }
+        <h5>@String.Format("Total: {0} €", Model.Cart.Total)</h5>
+        @if (Model.Discount != 0)
+        {
+            <h5>@String.Format("You applied a {0}% discount!", Model.Discount * 100)</h5>
+        }
+    </div>
+</div>
+<hr />
+
+@using (Html.BeginForm("ApplyDiscount", "Cart", FormMethod.Post, new { autocomplete = "off" }))
+{
+    <div class="row">
+        <div class="col-sm-2">@Html.LabelFor(m => m.DiscountCode)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.DiscountCode)</div>
+        <div class="col-sm-2"><input type="submit" name="ApplyDiscount" value="ApplyDiscount" /></div>
+    </div>
+}
+<hr />
+@using (Html.BeginForm("ElaborateOrder", "Checkout", FormMethod.Post, new { autocomplete = "off" }))
+{
+    <div class="row">
+        <div class="col-sm-2">@Html.LabelFor(m => m.Address)</div>
+        <div class="col-sm-3">@Html.TextBoxFor(m => m.Address, new { @class = "form-control" })</div>
+        <div class="col-sm-3">@Html.ValidationMessageFor(m => m.Address) </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">@Html.LabelFor(m => m.SelectedPaymentType)</div>
+        <div class="col-sm-3">
+            @Html.DropDownListFor(m => m.SelectedPaymentType,
+               new SelectList(Model.AllowedPayments),
+               "Select Payment Type", new { @class = "form-control" })
+        </div>
+        <div class="col-sm-3">@Html.ValidationMessageFor(m=>m.AllowedPayments)</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><input type="submit" name="ElaborateOrder" value="ElaborateOrder" /></div>
+    </div>
+}
+

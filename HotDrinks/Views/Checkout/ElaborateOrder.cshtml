@@ -1,0 +1,11 @@
+﻿@model HotDrinks.DAL.Abstractions.IOrder
+
+@{
+    ViewBag.Title = "ElaborateOrder";
+}
+
+<h2>Your Order is Complete!</h2>
+<h3>Your order of @String.Format("{0}", Model.Items.Select(i => i.Quantity).Sum()) drinks is ready! (Order Id: @Model.Id)</h3>
+<p>It will be shipped to @Model.Address</p>
+<p>You choose @Model.Payment.ToString() as payment type.</p>
+
